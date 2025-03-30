@@ -7,6 +7,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/sidharth-125/token_heap/entity"
+	"github.com/sidharth-125/token_heap/handler"
 )
 
 var data []entity.Token = []entity.Token{
@@ -40,6 +41,10 @@ func Setup() entity.TokenPool {
 }
 
 func main() {
+	handler.SetupServer()
+}
+
+func Reference() {
 	q := Setup()
 	starter := time.NewTicker(time.Second * 2)
 

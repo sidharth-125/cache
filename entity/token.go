@@ -1,9 +1,9 @@
 package entity
 
 type Token struct {
-	Expiry    int64
-	Id        string
-	UserEmail string
+	Expiry    int64  `json:"-"`
+	Id        string `json:"token_id"`
+	UserEmail string `json:"email"`
 }
 
 type TokenPool []*Token
