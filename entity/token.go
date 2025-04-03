@@ -1,9 +1,11 @@
 package entity
 
+import "time"
+
 type Token struct {
-	Expiry    int64  `json:"-"`
-	Id        string `json:"token_id"`
-	UserEmail string `json:"email"`
+	Expiry    time.Time `json:"expiry"`
+	Id        string    `json:"token_id"`
+	UserEmail string    `json:"email"`
 }
 
 type TokenPool []*Token
@@ -29,7 +31,9 @@ func (t TokenPool) Len() int {
 }
 
 func (t TokenPool) Less(i, j int) bool {
-	return t[i].Expiry < t[j].Expiry
+	first := t[i].Expiry
+	second := t[j].Expiry
+	return first.Before(second)
 }
 
 func (t *TokenPool) Update(items []Token) {
