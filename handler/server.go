@@ -114,7 +114,7 @@ func validateUser(u entity.User) error {
 }
 
 func (h *Handler) GetQueuedTokens(c echo.Context) error {
-	h.mutex.Lock()
+	h.mutex.RLock()
 	defer h.mutex.Unlock()
 
 	if len(h.tokenMap) == 0 {
